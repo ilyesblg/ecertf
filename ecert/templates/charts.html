@@ -1,0 +1,65 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="content-section"> 
+    <canvas id="myChart"></canvas>
+</div>
+<div class="content-section"> 
+  <canvas id="overtime_rate"></canvas>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.min.js"></script>
+<script>
+const data = {
+  labels: [
+    'Non Satisfait',
+    'Peu Satisfait',
+    'Satisfait',
+    'Très satisfait'
+  ],
+  datasets: [{
+    label: 'My First Dataset',
+    data: [ {{avrg_data1}} , {{avrg_data2}}, {{avrg_data3}},{{avrg_data4}}],
+    backgroundColor: [
+      'rgb(255, 99, 132)',
+      'rgb(54, 162, 235)',
+      'rgb(255, 205, 86)',
+      'rgb(124, 252, 0)'
+      
+    ],
+    hoverOffset: 4
+  }]
+};
+  
+    const config = {
+      type: 'doughnut',
+      data: data,
+      options: {}
+    };
+
+    over_time_rate = JSON.parse({{over_time_rate | tojson}})
+        labels = JSON.parse({{ dates_label  | tojson}})
+
+        new Chart(document.getElementById("overtime_rate"), {
+                type: "line",
+                data:
+                {
+                    labels: labels,
+                    datasets: [{
+                        label: "Progression Par Mois",
+                        
+                        data: over_time_rate,
+                        fill: false,
+                        borderColor: "rgb(75, 192, 192)",
+                        lineTension: 0.1
+                    }]
+                },
+                options: {}
+            });
+  </script>
+  <script>
+    const myChart = new Chart(
+      document.getElementById('myChart'),
+      config
+    );
+  </script>
+
+{% endblock content %}

@@ -1,6 +1,6 @@
 
 <p align="center">
-  <img width="200" src="https://imgur.com/a/GPbpaki">
+  <img width="200" src="https://i.imgur.com/dylHoOz.png" >
 </p>
 
 
